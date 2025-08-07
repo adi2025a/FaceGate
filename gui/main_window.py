@@ -24,8 +24,11 @@ class FaceGateApp(ctk.CTk):
         self.capture_button = ctk.CTkButton(self, text="Capture Face", command=self.capture_face)
         self.capture_button.pack(pady=10)
 
-        self.select_app_button = ctk.CTkButton(self, text="Select Application", command=self.select_app)
-        self.select_app_button.pack(pady=10)
+        self.entry = ctk.CTkEntry(self, placeholder_text="enter command here")
+        self.entry.pack(pady=10)
+
+        self.submit_button = ctk.CTkButton(self, text="Submit", command=self.select_app)
+        self.submit_button.pack(pady=10)
 
         self.status_label = ctk.CTkLabel(self, text="")
         self.status_label.pack(pady=20)
@@ -38,9 +41,10 @@ class FaceGateApp(ctk.CTk):
             self.status_label.configure(text="❌ Face not detected!")
 
     def select_app(self):
-        filepath = filedialog.askopenfilename(title="Select an App Executable")
-        if filepath:
-            save_app_command(filepath)
-            self.status_label.configure(text=f"✅ App saved: {filepath}")
+        command =self.entry.get()
+        if command:
+            save_app_command(command)
+            self.status_label.configure(text=f"✅ Command saved: {command}")
         else:
             self.status_label.configure(text="No app selected.")
+
