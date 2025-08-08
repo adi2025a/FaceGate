@@ -1,3 +1,8 @@
 {
-    "app_command": "hello"
+    "app_command": "google-chrome",
+    "google-chrome": {
+        "exec": "google-chrome",
+        "original_exec": "Exec=/usr/bin/google-chrome-stable --incognito",
+        "patched": true
+    }
 }

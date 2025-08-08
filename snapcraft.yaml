@@ -1,0 +1,33 @@
+name: facegate
+base: core22
+version: '1.0'
+summary: Face-based launcher protection
+description: >
+  FaceGate adds a facial recognition layer to selected apps like Chrome or VSCode.
+
+grade: stable
+confinement: strict  # Change to 'devmode' during testing if needed
+
+apps:
+  facegate:
+    command: bin/launch
+    plugs:
+      - desktop
+      - desktop-legacy
+      - camera
+      - x11
+      - home
+    extensions: [gnome]
+
+parts:
+  facegate:
+    plugin: python
+    source: .
+    python-packages:
+      - opencv-python
+      - numpy
+      - customtkinter
+      - Pillow
+      - dlib  # Or face_recognition if you're using that
+    stage-packages:
+      - libgl1  # Needed by OpenCV
